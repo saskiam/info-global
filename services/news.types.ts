@@ -16,7 +16,7 @@ export type HeadingBlock = {
 
 export type ImageBlock = {
     type: "image";
-    url: string;
+    src: string;
     alt: string;
     caption?: string;
 
@@ -41,6 +41,7 @@ export type Block =   | ParagraphBlock
   | ListBlock;
 
 export type CoverImage = {
+    src: string;
     url: string;
     alt: string;
 };
@@ -48,6 +49,7 @@ export type CoverImage = {
 export type Author = {
     name: string;
     avatar: string;
+    bio?: string;
 };
 
 export type NewsArticle = {

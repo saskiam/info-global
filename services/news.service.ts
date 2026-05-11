@@ -8,7 +8,7 @@ import { NewsArticle } from "./news.types";
  * */
 
 export async function getNews(): Promise<NewsArticle[]> {
-    const dataURL = process.env.DATA_URL;
+    const dataURL = process.env.NEXT_PUBLIC_DATA_URL;
 
     // Verificar que la url exista
     if (!dataURL) {
@@ -29,5 +29,16 @@ export async function getNews(): Promise<NewsArticle[]> {
     }
 
     const news: NewsArticle[] = await response.json();
+    console.log(news);
     return news;
+}
+
+export async function getArticleBySlug(slug: string): Promise<NewsArticle> {
+    console.log(slug);
+  const news: NewsArticle[] = await getNews();
+  const article = news.find((article) => article.slug === slug);
+  if (!article) {
+    throw new Error("Artículo no encontrado");
+  }
+  return article;
 }
