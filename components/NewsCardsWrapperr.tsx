@@ -22,8 +22,8 @@ export default function NewsCardsWrapper({
 }: NewsCardsWrapperProps) {
   const [hoveredSlug, setHoveredSlug] = useState<string | null>(null);
 
-  const nationalNewsSection = sections.find(
-    (section: NewsSections) => section.title === "Nacionales"
+  const scienceNewsSectionn = sections.find(
+    (section: NewsSections) => section.title === "Ciencia"
   );
 
   const sportsNewsSection = sections.find(
@@ -50,15 +50,15 @@ export default function NewsCardsWrapper({
 
       {/* Nacionales */}
       <section
-        id="nacionales"
+        id="ciencia"
         className="section-content"
       >
         <h5 className="section-title">
-          Nacionales · Entérate del acontecer nacional
+          Ciencia · Enterate de los ultimos avances cientificos
         </h5>
 
         <NewsCardsCarousel
-          news={nationalNewsSection?.news ?? []}
+          news={scienceNewsSectionn?.news ?? []}
           setHoveredSlug={setHoveredSlug}
         />
       </section>

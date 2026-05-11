@@ -12,17 +12,12 @@ type NewsSections = {
 
 export default async function Home() {
 
-   // filter news by category
-  
-
-  //concatenar 3 categorias en una sola matriz
-const allNationalNews = [...await getNewsByCategory("politica"), ...await getNewsByCategory("ciencia"), ...await getNewsByCategory("salud")];
 
   //crear arreglo de news por 3 categorias: politica, tecnologia, deportes
   const newsSections: NewsSections[] = [
     {
-      title: "Nacionales",
-      news: allNationalNews
+      title: "Ciencia",
+      news: await getNewsByCategory("ciencia")
     },
     {
       title: "Tecnologia",

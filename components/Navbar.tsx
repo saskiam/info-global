@@ -28,7 +28,7 @@ export default function Header() {
         <ul className="hidden gap-6 md:flex text-xl">
           <li className="cursor-pointer text-gray-800 hover:text-orange-700 transition">
              <Link
-                href="/#nacionales"
+                href="/#ciencia"
                 className="
                   cursor-pointer
                   text-gray-800
@@ -36,7 +36,7 @@ export default function Header() {
                   transition
                 "
               >
-                Nacionales
+                Ciencia
               </Link>
           </li>
           <li className="cursor-pointer text-gray-800 hover:text-orange-700 transition">
@@ -95,7 +95,7 @@ export default function Header() {
         >
           <ul className="flex flex-col gap-4">
             <li className="cursor-pointer text-gray-700 hover:text-orange-700">
-              Nacionales
+              Ciencia
             </li>
             <li className="cursor-pointer text-gray-700 hover:text-orange-700">
               Deportes
