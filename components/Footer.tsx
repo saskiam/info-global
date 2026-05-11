@@ -1,3 +1,6 @@
+import FBIcon from "./icons/FBIcon";
+import IGIcon from "./icons/IGIcon";
+import XIcon from "./icons/XIcon";
 
 export default function Footer() {
     return (
@@ -10,7 +13,7 @@ export default function Footer() {
     shadow-2xl
   "
 >
-  <div className="mx-auto max-w-screen-xl px-4 py-8 text-center md:px-8 lg:px-10">
+  <div className="mx-auto max-w-7xl px-4 py-8 text-center md:px-8 lg:px-10">
     
     {/* Logo */}
     <a
@@ -28,62 +31,12 @@ export default function Footer() {
     {/* Redes sociales */}
     <div className="mt-4 flex justify-center gap-5">
       
-      <a
-        href="https://facebook.com"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="
-          flex h-11 w-11 items-center justify-center
-          rounded-full
-          bg-white/30
-          backdrop-blur-md
-          border border-white/20
-          text-sm font-bold text-blue-700
-          shadow-md
-          transition-all duration-300
-          hover:scale-110 hover:bg-blue-100/40
-        "
-      >
-        FB
-      </a>
+      <FBIcon action="follow"/>
 
-      <a
-        href="https://x.com"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="
-          flex h-11 w-11 items-center justify-center
-          rounded-full
-          bg-white/30
-          backdrop-blur-md
-          border border-white/20
-          text-sm font-bold text-black
-          shadow-md
-          transition-all duration-300
-          hover:scale-110 hover:bg-gray-200/40
-        "
-      >
-        X
-      </a>
+      <IGIcon action="follow"/>
 
-      <a
-        href="https://instagram.com"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="
-          flex h-11 w-11 items-center justify-center
-          rounded-full
-          bg-white/30
-          backdrop-blur-md
-          border border-white/20
-          text-sm font-bold text-pink-700
-          shadow-md
-          transition-all duration-300
-          hover:scale-110 hover:bg-pink-100/40
-        "
-      >
-        IG
-      </a>
+      <XIcon action="follow"/>
+
     </div>
 
     {/* Copyright */}

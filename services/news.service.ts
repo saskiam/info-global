@@ -29,12 +29,10 @@ export async function getNews(): Promise<NewsArticle[]> {
     }
 
     const news: NewsArticle[] = await response.json();
-    console.log(news);
     return news;
 }
 
 export async function getArticleBySlug(slug: string): Promise<NewsArticle> {
-    console.log(slug);
   const news: NewsArticle[] = await getNews();
   const article = news.find((article) => article.slug === slug);
   if (!article) {
@@ -42,3 +40,8 @@ export async function getArticleBySlug(slug: string): Promise<NewsArticle> {
   }
   return article;
 }
+
+ export async function getNewsByCategory (category: string): Promise<NewsArticle[]>  {
+    const news: NewsArticle[] = await getNews();
+    return news.filter((article) => article.category === category);
+  };

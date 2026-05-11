@@ -2,6 +2,11 @@ import { getArticleBySlug } from "@/services/news.service";
 import Image from "next/image";
 import { Block } from "@/services/news.types";
 import { formatDate } from "@/helpers/formatDate";
+import Avatar from "@/components/Avatar";
+import FBIcon from "@/components/icons/FBIcon";
+import WTIcon from "@/components/icons/WTIcon";
+import XIcon from "@/components/icons/XIcon";
+import RelatedArticles from "@/components/RelatedArticles";
 
 
 export default async function Page({
@@ -16,36 +21,34 @@ const { slug } = await params
   return ( 
     
   <main className=" pb-16 lg:pt-8 lg:pb-24 max-w-screen bg-white dark:bg-white antialiased">
-        {/* <figure className="w-full justify-center items-center flex h-90 "><Image src={article.coverImage?.src || "/no-Image.jpg"} width={900} height={1250} alt=""/>          
-          </figure> */}
+      
          <div className="flex justify-center items-center h-80">
   <div className="relative inline-block">
     <Image
       src={article.coverImage?.src || "/no-Img.jpg"}
-      width={900}
+      width={1300}
       height={300}
       alt="demo"
     />
 
-    <span
-      className="
-        absolute
-        lg:bottom-28 sm:bottom-10 left-4
-        px-3 py-1
-        text-xs font-bold
-        bg-amber-500 text-white
-        rounded-full
-      "
-    >
-      {article.category?.toUpperCase()}
-    </span>
+   
   </div>
 </div>
    <div className="px-4 mx-auto max-w-7xl flex justify-center">
   <article className="w-full max-w-4xl z-10 bg-white mb-8 format format-sm sm:format-base lg:format-lg format-blue dark:format-invert lg:text-justify">
     <header className="mb-4 lg:m-6">
+       <span
+      className="
+        px-3 py-1
+        text-sm font-bold
+        bg-amber-500 text-white
+        rounded 
+      "
+    >
+      {article.category?.toUpperCase()}
+    </span>
   
-      <h1 className="my-4 mx-10  text-3xl font-extrabold leading-tight text-gray-900 lg:mb-6 lg:text-4xl dark:text-black">
+      <h1 className="my-5 mx-10  text-3xl font-extrabold leading-tight text-gray-900 lg:mb-6 lg:text-4xl dark:text-black">
         {article.title}
       </h1>
 
@@ -62,23 +65,8 @@ const { slug } = await params
   {/* AUTHOR */}
   <address className="not-italic">
     <div className="flex items-start justify-start mr-3 text-sm text-gray-900 dark:text-white">
-
-      <Image
-        className="mr-4 w-16 h-16 rounded-full"
-        src={article.author?.avatar || "/no-Img.jpg"}
-        width={100}
-        height={100}
-        alt="Jese Leos"
-      />
-
       <div>
-        <a
-          href="#"
-          rel="author"
-          className="text-base font-bold text-gray-900 dark:text-gray-600"
-        >
-          {article.author?.name}
-        </a>
+        <Avatar avatar={article.author?.avatar} authorName={article.author?.name} className=" text-gray-600 text-lg"/>
 
         <p className="text-sm text-gray-200 dark:text-gray-500">
           {article.author?.bio}
@@ -97,64 +85,16 @@ const { slug } = await params
   {/* SECTION AL LADO */}
   <section className="text-center justify-center mt-4 md:mt-0">
     <p className="text-sm text-gray-500">
-     Síguenos en nuestras redes sociales
+     compartelo en tus redes sociales
     </p>
 
     <div className="flex gap-5 mt-2 justify-center">
 
-  <a
-    href="https://facebook.com"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="
-      flex items-center justify-center
-      w-10 h-10
-      rounded-full
-      bg-gray-100
-      hover:bg-blue-100
-      text-sm font-bold
-      text-blue-700
-      transition
-    "
-  >
-    FB
-  </a>
+ <FBIcon action="share"/>
+  <WTIcon action="share"/>
+  <XIcon action="share"/>
 
-  <a
-    href="https://x.com"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="
-      flex items-center justify-center
-      w-10 h-10
-      rounded-full
-      bg-gray-100
-      hover:bg-gray-300
-      text-sm font-bold
-      text-black
-      transition
-    "
-  >
-    X
-  </a>
-
-  <a
-    href="https://instagram.com"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="
-      flex items-center justify-center
-      w-10 h-10
-      rounded-full
-      bg-gray-100
-      hover:bg-pink-100
-      text-sm font-bold
-      text-red-700
-      transition
-    "
-  >
-    IG
-  </a>
+ 
 
 </div>
   </section>
@@ -170,7 +110,7 @@ const { slug } = await params
         case "paragraph":
           return (
             <p
-              key={index}
+              key={article.slug + index}
               className="text-lg leading-8 text-justify text-gray-700"
             >
               {block.text}
@@ -180,7 +120,7 @@ const { slug } = await params
         case "heading":
           return (
             <h2
-              key={index}
+              key={article.slug + index}
               className="text-2xl font-bold mt-5 "
             >
               {block.text}
@@ -190,7 +130,7 @@ const { slug } = await params
         case "image":
           return (
             <Image
-              key={index}
+              key={article.slug}
               src={block.src}
               alt={block.alt}
               width={1200}
@@ -203,7 +143,7 @@ const { slug } = await params
         case "quote":
           return (
             <blockquote
-              key={index}
+              key={article.slug + index}
               className="border-l-4 border-gray-300 pl-4 italic text-gray-600"
             >
               {block.text}
@@ -213,7 +153,7 @@ const { slug } = await params
         case "list":
           return (
             <ul
-              key={index}
+              key={article.slug + index}
               className="list-disc pl-6 space-y-2"
             >
               {block.items.map((item, i) => (
@@ -231,53 +171,11 @@ const { slug } = await params
   </section>
 
   </article>
- 
+  
 
 </div>
- <aside aria-label="Related articles" className="py-8 lg:py-24 bg-gray-80 dark: bg-orange-800/30">
-  <div className="px-4 mx-auto max-w-screen-xl">
-      <h2 className="mb-8 text-2xl font-bold text-gray-900 dark:text-white">Related articles</h2>
-      <div className="grid gap-12 sm:grid-cols-1 lg:grid-cols-4">
-          <article className="max-w-xs">
-              <a href="#">
-                  <Image src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/article/blog-1.png" className="mb-5 rounded-lg" width ={300} height={200} alt="Image 1"/>
-              </a>
-              <h2 className="mb-2 text-xl font-bold leading-tight text-gray-900 dark:text-white">
-                  <a href="#">Our first office</a>
-              </h2>
-              <p className="mb-4 text-gray-500 dark:text-gray-400">Over the past year, Volosoft has undergone many changes! After months of preparation.</p>
-              <a href="#" className="inline-flex items-center font-medium underline underline-offset-4 text-primary-600 dark:text-primary-500 hover:no-underline">
-                  Read in 2 minutes
-              </a>
-          </article>
-          <article className="max-w-xs">
-              <a href="#">
-                  <Image src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/article/blog-2.png" className="mb-5 rounded-lg" width ={300} height={200} alt="Image 2"/>
-              </a>
-              <h2 className="mb-2 text-xl font-bold leading-tight text-gray-900 dark:text-white">
-                  <a href="#">Enterprise design tips</a>
-              </h2>
-              <p className="mb-4  text-gray-500 dark:text-gray-400">Over the past year, Volosoft has undergone many changes! After months of preparation.</p>
-              <a href="#" className="inline-flex items-center font-medium underline underline-offset-4 text-primary-600 dark:text-primary-500 hover:no-underline">
-                  Read in 12 minutes
-              </a>
-          </article>
-          <article className="max-w-xs">
-              <a href="#">
-                  <Image src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/article/blog-3.png" className="mb-5 rounded-lg" width ={300} height={200} alt="Image 3"/>
-              </a>
-              <h2 className="mb-2 text-xl font-bold leading-tight text-gray-900 dark:text-white">
-                  <a href="#">We partnered with Google</a>
-              </h2>
-              <p className="mb-4  text-gray-500 dark:text-gray-400">Over the past year, Volosoft has undergone many changes! After months of preparation.</p>
-              <a href="#" className="inline-flex items-center font-medium underline underline-offset-4 text-primary-600 dark:text-primary-500 hover:no-underline">
-                  Read in 8 minutes
-              </a>
-          </article>
-         
-      </div>
-  </div>
-</aside>
+<RelatedArticles categoryName={article.category} mainArticleSlug={article.slug}/>
+
   </main>
 
 

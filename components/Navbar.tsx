@@ -67,7 +67,7 @@ export default function Header() {
           </li>
         </ul>
 
-        {/* Botón mobile */}
+        {/* Botón para menú mobile */}
         <button
           onClick={() => setOpen(!open)}
           className="

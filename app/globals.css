@@ -24,3 +24,84 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+@layer components {
+
+ .news-card-container {
+    @apply shrink-0
+              w-70
+              h-120
+              px-3
+
+              sm:w-[320px]
+              sm:h-125
+
+              md:w-87.5
+              md:h-130
+
+              lg:w-95
+              lg:h-135
+  }
+
+  .news-card {
+    @apply flex
+      h-full
+      flex-col
+      overflow-hidden
+      rounded-xl
+      border
+      border-gray-200
+      bg-white
+      shadow-md
+      transition-all
+      duration-300
+      hover:scale-105
+      hover:shadow-2xl;
+  }
+
+  .carousel-button {
+    @apply absolute
+      top-1/2
+      z-20
+      -translate-y-1/2
+      rounded-full
+      bg-black/50
+      p-3
+      text-white
+      backdrop-blur-sm
+      transition
+      hover:bg-black/70;
+  }
+
+  .section-content {
+    @apply mt-12
+          flex
+          w-full
+          flex-1
+          flex-col
+          items-center
+          justify-center
+          sm:mt-0
+          sm:items-start
+  }
+
+   .section-title {
+    @apply inline-block
+      mt-10
+      mb-0
+      border-l-8
+      border-yellow-300
+      bg-linear-to-r
+      from-orange-700
+      to-orange-500
+      px-6
+      py-3
+      font-sans
+      text-xl
+      font-black
+      uppercase
+      tracking-wide
+      text-white
+      shadow-lg;
+  }
+}
