@@ -1,159 +1,189 @@
 "use client";
 
-import { useState } from "react";
+import { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, CalendarDays } from "lucide-react";
+
+import {
+  ArrowLeft,
+  ArrowRight,
+  CalendarDays,
+} from "lucide-react";
+
 import { formatDate } from "@/helpers/formatDate";
 import Avatar from "./Avatar";
 import { NewsCardProps } from "./Components.Interface";
-
-
 
 export default function NewsCardsCarousel({
   news,
   setHoveredSlug,
 }: NewsCardProps) {
-  
-  const [current, setCurrent] = useState(0);
+  const carouselRef = useRef<HTMLDivElement>(null);
 
-  // Mover a la derecha siguiente bloque
-  const nextSlide = () => {
-    setCurrent((prev) =>
-      prev === news.length - 1 ? 0 : prev + 1
-    );
-  };
+  const scroll = (direction: "left" | "right") => {
+    if (!carouselRef.current) return;
 
-  // Mover a la izquierda bloque anterior
-  const prevSlide = () => {
-    setCurrent((prev) =>
-      prev === 0 ? news.length - 1 : prev - 1
-    );
+    const amount = 340;
+
+    carouselRef.current.scrollBy({
+      left: direction === "right" ? amount : -amount,
+      behavior: "smooth",
+    });
   };
 
   return (
-    <div className="relative w-full overflow-hidden py-8">
-      {/* Botón izquierdo */}
+    <div className="relative w-full">
+      {/* Boton izquierdo de carrousel */}
       <button
-        onClick={prevSlide}
+        onClick={() => scroll("left")}
         className="
-         carousel-button left-2
+          carousel-button
+          left-2
+          hidden md:flex
         "
       >
-        ←
+        <ArrowLeft className="h-5 w-5" />
       </button>
 
-      {/* Botón derecho */}
+      {/* Boton derecho de carrousel */}
       <button
-        onClick={nextSlide}
+        onClick={() => scroll("right")}
         className="
-         carousel-button right-2
+          carousel-button
+          right-2
+          hidden md:flex
         "
       >
-        →
+        <ArrowRight className="h-5 w-5" />
       </button>
-
-      {/* Carousel de cards de noticias */}
+    {/* Render de cards article para el carrousel,
+    set de eventos mouse y touch */}
+      
       <div
+        ref={carouselRef}
         className="
           flex
-          transition-transform
-          duration-700
-          ease-in-out
+          items-stretch
+          gap-6
+          overflow-x-auto
+          overflow-hidden
+          scroll-smooth
+          snap-x
+          snap-mandatory
+          px-4
+          py-8
+          scrollbar-thin
+          scrollbar-track-gray-100
+
         "
-        style={{
-          transform: `translateX(-${current * 100}%)`,
-        }}
       >
         {news.map((card) => (
-          <div
-            key={card.title}
-            className="news-card-container"
+          <article
+            key={card.slug}
+            onMouseEnter={() => setHoveredSlug(card.slug)}
+            onTouchStart={() => setHoveredSlug(card.slug)}
+            className="
+              news-card
+              snap-center
+              shrink-0
+              w-[85%]
+              h-auto
+              sm:w-[320px]
+              md:w-[350px]
+              lg:w-[380px]
+              min-h-[520px]
+              flex
+              flex-col
+              border
+              border-gray-200
+              bg-white
+              shadow-md
+              transition-all
+              duration-300
+              hover:scale-105
+              hover:shadow-2xl
+            "
           >
-            <article
-              className="
-                news-card
-              "
-              onMouseEnter={() => setHoveredSlug(card.slug)}
-            >
-              {/* Imagen */}
-              <div className="overflow-hidden">
-                <Image
+            {/* Imagen de noticia */}
+            <div className="overflow-hidden">
+              <Image
+                src={card.coverImage?.src || "/no-img.jpg"}
+                width={900}
+                height={500}
+                alt={card.title}
+                className="
+                  h-56
+                  w-full
+                  object-cover
+                  transition-transform
+                  duration-500
+                  hover:scale-105
+                "
+              />
+            </div>
+
+            {/* Contenido de card */}
+            <div className="flex flex-1 flex-col justify-between p-6">
+              <div>
+                <div
                   className="
-                    h-55
-                    w-full
-                    object-cover
+                    mb-4
+                    flex
+                    items-center
+                    justify-between
+                    gap-4
+                    text-sm
+                    font-bold
+                    text-gray-500
                   "
-                  src={card.coverImage?.src || "/no-img.jpg"}
-                  width={900}
-                  height={500}
-                  alt={card.title}
-                />
-              </div>
+                >
+                  <span>
+                    {card.category.toUpperCase()}
+                  </span>
 
-              {/* Contenido del artículo */}
-              <div className="flex flex-1 flex-col justify-between p-6">
-                <div>
-                  <div
-                    className="
-                      mb-4
-                      flex
-                      items-center
-                      justify-between
-                      text-sm
-                      font-bold
-                      text-gray-500
-                    "
-                  >
+                  <div className="flex items-center gap-2">
+                    <CalendarDays className="h-4 w-4" />
                     <span>
-                      {card.category.toUpperCase()}
+                      {formatDate(card.publishedAt)}
                     </span>
-
-                    <div className="flex items-center gap-2">
-                      <CalendarDays className="h-4 w-4" />
-
-                      <span>
-                        {formatDate(card.publishedAt)}
-                      </span>
-                    </div>
                   </div>
-
-                  <h2 className="mb-3 text-xl font-bold text-orange-500">
-                    {card.title}
-                  </h2>
-
-                  <p className="mb-5 line-clamp-4 text-xs text-gray-700">
-                    {card.excerpt || card.title}
-                  </p>
                 </div>
 
-                {/* Footer de la card */}
-                <div className="flex items-center justify-between pt-4">
-                  <Avatar
-                    avatar={card.author?.avatar}
-                    authorName={card.author?.name}
-                  />
+                {/* Ttitulo */}
+                <h2 className="mb-3 text-xl font-bold text-orange-500">
+                  {card.title}
+                </h2>
 
-                  <Link
-                    href={`/article/${card.slug}`}
-                    className="
-                      flex
-                      items-center
-                      justify-between
-                      gap-2
-                      font-semibold
-                      text-orange-600
-                      hover:underline
-                    "
-                  >
-                    <p>Leer más</p>
-
-                    <ArrowRight className="h-4 w-4 text-orange-600" />
-                  </Link>
-                </div>
+                {/* Excerpt */}
+                <p className="mb-5 line-clamp-4 text-sm text-gray-700">
+                  {card.excerpt || card.title}
+                </p>
               </div>
-            </article>
-          </div>
+
+              {/* Contenido de autor y boton */}
+              <div className="flex items-center justify-between pt-4">
+                <Avatar
+                  avatar={card.author?.avatar}
+                  authorName={card.author?.name}
+                />
+
+                <Link
+                  href={`/article/${card.slug}`}
+                  className="
+                    flex items-center gap-2
+                    font-semibold text-orange-600
+                    transition
+                    hover:underline
+                    active:scale-95
+                  "
+                >
+                  <span>Leer más</span>
+
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
+            </div>
+          </article>
         ))}
       </div>
     </div>
