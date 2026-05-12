@@ -2,26 +2,21 @@
 
 import { useState } from "react";
 
-import { NewsArticle } from "@/services/news.types";
-
-import NewsCards from "./NewsCardsCarousel";
 import NewsCarousel from "./FrontArticle";
 import NewsCardsCarousel from "./NewsCardsCarousel";
 
-type NewsSections = {
-  title: string;
-  news: NewsArticle[];
-};
-
-interface NewsCardsWrapperProps {
-  sections: NewsSections[];
-}
+import {
+  NewsCardsWrapperProps,
+  NewsSections,
+} from "./Components.Interface";
 
 export default function NewsCardsWrapper({
   sections,
 }: NewsCardsWrapperProps) {
+  //Elevación de estado para manejar valor del slug al pasar el mouse
   const [hoveredSlug, setHoveredSlug] = useState<string | null>(null);
 
+  //Se extraen las secciones
   const scienceNewsSectionn = sections.find(
     (section: NewsSections) => section.title === "Ciencia"
   );
@@ -48,7 +43,7 @@ export default function NewsCardsWrapper({
         mainArticle={currentArticle ?? allArticles[0]}
       />
 
-      {/* Nacionales */}
+      {/* Ciencia */}
       <section
         id="ciencia"
         className="section-content"

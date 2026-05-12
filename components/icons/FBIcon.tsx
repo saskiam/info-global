@@ -1,6 +1,8 @@
 
 "use client";
 
+import { IconProps } from "./Icons.interface";
+
 export default function FBIcon( {action}: IconProps) {
 
     const shareOnFB = () => {

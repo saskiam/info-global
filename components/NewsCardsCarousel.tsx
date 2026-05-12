@@ -3,23 +3,18 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-
 import { ArrowRight, CalendarDays } from "lucide-react";
-
 import { formatDate } from "@/helpers/formatDate";
-import { NewsArticle } from "@/services/news.types";
-
 import Avatar from "./Avatar";
+import { NewsCardProps } from "./Components.Interface";
 
-type NewsCarouselProps = {
-  news: NewsArticle[];
-  setHoveredSlug: (slug: string | null) => void;
-};
+
 
 export default function NewsCardsCarousel({
   news,
   setHoveredSlug,
-}: NewsCarouselProps) {
+}: NewsCardProps) {
+  
   const [current, setCurrent] = useState(0);
 
   // Mover a la derecha siguiente bloque

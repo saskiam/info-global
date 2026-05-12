@@ -1,9 +1,7 @@
 
 import NewsCardsWrapper from "@/components/NewsCardsWrapperr";
-import NewsCarousel from "@/components/FrontArticle"; 
-import { getNews, getNewsByCategory } from "@/services/news.service";
+import { getNewsByCategory } from "@/services/news.service";
 import { NewsArticle } from "@/services/news.types";
-// import NewsCards from "./comp
 
 type NewsSections = {
   title: string;
@@ -11,9 +9,7 @@ type NewsSections = {
 };
 
 export default async function Home() {
-
-
-  //crear arreglo de news por 3 categorias: politica, tecnologia, deportes
+  //crear arreglo de news por 3 categorias: Ciencia, tecnologia, deportes
   const newsSections: NewsSections[] = [
     {
       title: "Ciencia",
@@ -36,6 +32,7 @@ export default async function Home() {
      <div className="bg-[#EEE9DF] min-h-screen space-y-4" >
       <main className="flex flex-1 w-full min-h-screen  flex-col items-center justify-between   bg-white sm:items-start">
        <section className=" w-full" >
+        {/* wrapper  para los news cards */}
         < NewsCardsWrapper sections={newsSections} />
        </section>
     

@@ -1,4 +1,4 @@
-
+// Helper para formatear fechas en idioma inglés
 export const formatDate = (dateString: string) => {
     const date = new Date(dateString);
 

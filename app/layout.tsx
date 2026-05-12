@@ -29,6 +29,7 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
+     {/* Se envuelve coloca Navbar y Footer en el body */}
       <body className="min-h-full bg-white flex flex-col "><Navbar/>{children} <Footer/></body>
     </html>
   );

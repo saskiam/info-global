@@ -1,5 +1,6 @@
 "use client";
-export default function IGIcon(  {action}: IconProps) {
+
+export default function IGIcon( ) {
 
     const followOnIG = () => {
         window.open(
@@ -16,7 +17,7 @@ export default function IGIcon(  {action}: IconProps) {
     items-center
     gap-2
     rounded-lg
-    bg-gradient-to-r
+    bg-linear-to-r
     from-pink-500
     via-red-500
     to-yellow-500

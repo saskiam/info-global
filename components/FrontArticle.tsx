@@ -1,14 +1,12 @@
 
-
-
-import { NewsArticle } from "@/services/news.types";
 import Image from "next/image";
 import Link from "next/link";
 import Avatar from "./Avatar";
+import { FrontArticleProps } from "./Components.Interface";
 
 
-export default  function FrontArticle( {mainArticle} : {mainArticle: NewsArticle}) {
-    
+
+export default  function FrontArticle( {mainArticle}: FrontArticleProps) {
 
   return (
     <section className="relative w-full overflow-hidden ">

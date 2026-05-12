@@ -1,5 +1,6 @@
 "use client";
 
+import { Menu } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -79,7 +80,7 @@ export default function Header() {
             border border-white/80
           "
         >
-          ☰
+          <Menu className="h-6 w-6 text-white" />
         </button>
       </nav>
 

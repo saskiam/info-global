@@ -2,6 +2,7 @@ import FBIcon from "./icons/FBIcon";
 import IGIcon from "./icons/IGIcon";
 import XIcon from "./icons/XIcon";
 
+
 export default function Footer() {
     return (
       <footer

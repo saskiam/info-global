@@ -1,4 +1,7 @@
 "use client";
+
+import { IconProps } from "./Icons.interface";
+
 export default function XIcon(  {action}: IconProps) {
 
      const shareOnX = () => {

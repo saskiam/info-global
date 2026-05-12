@@ -8,6 +8,7 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -26,21 +27,17 @@ body {
 }
 
 @layer components {
-
- .news-card-container {
+  .news-card-container {
     @apply shrink-0
-              w-70
-              h-120
-              px-3
-
-              sm:w-[320px]
-              sm:h-125
-
-              md:w-87.5
-              md:h-130
-
-              lg:w-95
-              lg:h-135
+      w-70
+      h-120
+      px-3
+      sm:w-[320px]
+      sm:h-125
+      md:w-87.5
+      md:h-130
+      lg:w-95
+      lg:h-135;
   }
 
   .news-card {
@@ -75,20 +72,20 @@ body {
 
   .section-content {
     @apply mt-12
-          flex
-          w-full
-          flex-1
-          flex-col
-          items-center
-          justify-center
-          sm:mt-0
-          sm:items-start
+      flex
+      w-full
+      flex-1
+      flex-col
+      items-center
+      justify-center
+      sm:mt-0
+      sm:items-start;
   }
 
-   .section-title {
-    @apply inline-block
-      mt-10
+  .section-title {
+    @apply mt-10
       mb-0
+      inline-block
       border-l-8
       border-yellow-300
       bg-linear-to-r

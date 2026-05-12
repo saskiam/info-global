@@ -32,6 +32,7 @@ export async function getNews(): Promise<NewsArticle[]> {
     return news;
 }
 
+//servicio para obtener un solo artículo por su slug
 export async function getArticleBySlug(slug: string): Promise<NewsArticle> {
   const news: NewsArticle[] = await getNews();
   const article = news.find((article) => article.slug === slug);
@@ -41,6 +42,7 @@ export async function getArticleBySlug(slug: string): Promise<NewsArticle> {
   return article;
 }
 
+//servicio para obtener artículos por categoría
  export async function getNewsByCategory (category: string): Promise<NewsArticle[]>  {
     const news: NewsArticle[] = await getNews();
     return news.filter((article) => article.category === category);
