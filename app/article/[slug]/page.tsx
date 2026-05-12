@@ -35,12 +35,14 @@ export default async function Page({
       <div className="flex h-80 items-center justify-center">
         <div className="relative inline-block">
           {/** Imagen de portada */}
-          <Image
-            src={article.coverImage?.src || "/no-Img.jpg"}
+           {!article?.coverImage?.src   ?
+            <div className="h-[300px] w-[1300px] animate-pulse rounded bg-gray-300" /> :<Image
+            src={ article.coverImage.src ?? "/no-img.jpg"}
             width={1300}
             height={300}
             alt="demo"
-          />
+          />}
+          
         </div>
       </div>
 
