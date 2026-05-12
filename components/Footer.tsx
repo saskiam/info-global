@@ -34,7 +34,7 @@ export default function Footer() {
       
       <FBIcon action="follow"/>
 
-      <IGIcon action="follow"/>
+      <IGIcon />
 
       <XIcon action="follow"/>
 
